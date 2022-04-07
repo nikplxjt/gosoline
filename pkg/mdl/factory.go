@@ -5,6 +5,22 @@ import (
 	"time"
 )
 
+type Boxable interface {
+	~bool | ~float32 | ~float64 | ~int | ~int32 | ~int64 | ~string | ~uint | time.Time
+}
+
+func Box[T Boxable](v T) *T {
+	return &v
+}
+
+func EmptyIfNil[T Boxable](v *T) (out T) {
+	if v != nil {
+		return *v
+	}
+
+	return
+}
+
 func Bool(v bool) *bool {
 	return &v
 }
