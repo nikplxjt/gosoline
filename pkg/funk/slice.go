@@ -174,14 +174,15 @@ func Difference[T comparable](sl1, sl2 []T) (left, right []T) {
 	return
 }
 
-func Intersect[T comparable](sl1, sl2 []T) (out []T) {
-	set1, set2 := ToSet(sl1), ToSet(sl2)
+func Intersect[T comparable](one, two []T) []T {
+	seconds := ToSet(two)
+	result := Set[T]{}
 
-	for val := range set1 {
-		if set2.Contains(val) {
-			out = append(out, val)
+	for _, val := range one {
+		if seconds.Contains(val) {
+			result.Set(val)
 		}
 	}
 
-	return
+	return FromSet(result)
 }
