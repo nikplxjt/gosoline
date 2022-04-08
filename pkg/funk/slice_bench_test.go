@@ -1,5 +1,6 @@
 package funk_test
 
+/*
 import (
 	"github.com/justtrackio/gosoline/pkg/funk"
 	goFunk "github.com/thoas/go-funk"
@@ -225,3 +226,4 @@ func staticIntSlice(length int) []int {
 
 	return a
 }
+*/
