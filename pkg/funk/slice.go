@@ -10,18 +10,15 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-// CastSlice casts a []any slice to the given type.
-// The parameter sliceType is required to correctly infer the target type.
-func CastSlice[T any, I ~[]any](sl I) ([]T, error) {
-	result := make([]T, len(sl))
+func CastSlice[T1 any, T2 any, I ~[]T2](sl I) ([]T1, error) {
+	result := make([]T1, len(sl))
 
-	for i := 0; i < len(sl); i++ {
-		el, ok := sl[i].(T)
+	for idx, item := range sl {
+		el, ok := item.(T1)
 		if !ok {
-			return nil, fmt.Errorf("could not cast element at index %d", i)
+			return nil, fmt.Errorf("could not cast element at index %d", idx)
 		}
-
-		result[i] = el
+		result[idx] = el
 	}
 
 	return result, nil

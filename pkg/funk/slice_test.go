@@ -9,11 +9,23 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCastSlice(t *testing.T) {
-	inputSlice := []any{"", ""}
+type strAlias string
+
+func TestCastSliceString(t *testing.T) {
+	inputSlice := []strAlias{"", ""}
 	expectedSlice := []string{"", ""}
 
 	target, err := funk.CastSlice[string](inputSlice)
+
+	assert.Equal(t, nil, err)
+	assert.Equal(t, expectedSlice, target)
+}
+
+func TestCastSliceInt(t *testing.T) {
+	inputSlice := []int{1, 2, 3}
+	expectedSlice := []int64{1, 2, 3}
+
+	target, err := funk.CastSlice[](inputSlice)
 
 	assert.Equal(t, nil, err)
 	assert.Equal(t, expectedSlice, target)
@@ -174,7 +186,7 @@ func TestIndex(t *testing.T) {
 		Foo string
 	}
 
-	var tests = map[string]struct {
+	tests := map[string]struct {
 		in    []obj
 		index int
 	}{
@@ -339,7 +351,7 @@ func TestRepeatStructPointer(t *testing.T) {
 }
 
 func TestTail(t *testing.T) {
-	var tests = map[string]struct {
+	tests := map[string]struct {
 		input    []string
 		expected []string
 	}{
